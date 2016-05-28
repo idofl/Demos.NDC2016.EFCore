@@ -1,4 +1,7 @@
 ﻿using Microsoft.Data.Entity;
+using Microsoft.Data.Entity.Infrastructure;
+using Microsoft.Data.Entity.Update;
+using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System;
@@ -16,27 +19,37 @@ namespace EFCore.Services
             var serviceCollection = new ServiceCollection();
 
             serviceCollection
-                .AddLogging()
                 .AddEntityFramework()
                 .AddSqlServer();
 
-            IServiceProvider serviceProvider = serviceCollection.BuildServiceProvider();
+            // Replace the batch executor with a custom wrapper implementation
+            serviceCollection.AddTransient<IBatchExecutor, CustomBatchExecutor>();
 
-            var loggerFactory = serviceProvider.GetService<ILoggerFactory>();
-            //loggerFactory.AddConsole(LogLevel.Debug);
-
+            IServiceProvider serviceProvider = serviceCollection.BuildServiceProvider();            
+            
             using (StarWarsContext context = new StarWarsContext(serviceProvider))
             {
+                serviceProvider = context.GetInfrastructure<IServiceProvider>();
+                
+                // Add a custom console logger, and a debug logger
+                // (can also be added to the serviceProvider before calling ctor)
+                var loggerFactory = serviceProvider.GetService<ILoggerFactory>();
+                loggerFactory.AddProvider(new ConsoleLoggerProvider(LogLevel.Information));
+                loggerFactory.AddDebug(LogLevel.Verbose);
+
                 context.Database.EnsureCreated();
 
-                Person luke = new Person
+                for (int i = 1; i < 10; i++)
                 {
-                    Name = "Luke Skywalker",
-                    HairColor = "Blond",
-                    Height = 1.72
-                };
+                    Person person = new Person
+                    {
+                        Name = $"Luke Skywalker #{i}",
+                        HairColor = "Blond",
+                        Height = 1.72                  
+                    };
 
-                context.People.Add(luke);
+                    context.People.Add(person);
+                }
                 context.SaveChanges();
 
                 var query = from p in context.People
@@ -44,7 +57,6 @@ namespace EFCore.Services
                             select p;
 
                 query.ToList().ForEach(p => Console.WriteLine(p.Name));
-
             }
         }
     }
