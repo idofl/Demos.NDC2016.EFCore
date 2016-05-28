@@ -12,7 +12,7 @@ namespace EFCore.Performance.EF6
         {
             using (var context = new StarWarsContext())
             {
-                if (context.People.Count() > 0)
+                if (context.People.Any())
                 {
                     context.Database.ExecuteSqlCommand("Delete from dbo.Starships");
                     context.Database.ExecuteSqlCommand("Delete from dbo.People");

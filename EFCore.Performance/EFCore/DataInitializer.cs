@@ -15,7 +15,7 @@ namespace EFCore.Performance.EFCore
             {
                 context.Database.EnsureCreated();
 
-                if (context.People.Count() > 0)
+                if (context.People.Any())
                 {
                     context.Database.ExecuteSqlCommand("Delete from dbo.Starship");
                     context.Database.ExecuteSqlCommand("Delete from dbo.Person");

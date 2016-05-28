@@ -9,6 +9,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EFCore.Performance", "EFCor
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EFCore.Queries", "EFCore.Queries\EFCore.Queries.csproj", "{BD31AD20-2541-4BA7-924C-38DDF48E81F9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EFCore.Metadata", "EFCore.Metadata\EFCore.Metadata.csproj", "{89A8B206-C84D-4A82-8105-ABE8AC59435F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EFCore.Services", "EFCore.Services\EFCore.Services.csproj", "{331CA3DC-8FE4-4E3B-808E-2F30A1541198}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +31,14 @@ Global
 		{BD31AD20-2541-4BA7-924C-38DDF48E81F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BD31AD20-2541-4BA7-924C-38DDF48E81F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BD31AD20-2541-4BA7-924C-38DDF48E81F9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{89A8B206-C84D-4A82-8105-ABE8AC59435F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{89A8B206-C84D-4A82-8105-ABE8AC59435F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{89A8B206-C84D-4A82-8105-ABE8AC59435F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{89A8B206-C84D-4A82-8105-ABE8AC59435F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{331CA3DC-8FE4-4E3B-808E-2F30A1541198}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{331CA3DC-8FE4-4E3B-808E-2F30A1541198}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{331CA3DC-8FE4-4E3B-808E-2F30A1541198}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{331CA3DC-8FE4-4E3B-808E-2F30A1541198}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
