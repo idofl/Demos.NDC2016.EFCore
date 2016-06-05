@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore.ChangeTracking;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -45,6 +46,10 @@ namespace EFCore.Platforms.Models
                        }
                    });
 
+                foreach(EntityEntry entry  in context.ChangeTracker.Entries<Person>())
+                {
+                    entry.Property("LastUpdated").CurrentValue = DateTime.Now;
+                }
                 context.SaveChanges();
             }
         }

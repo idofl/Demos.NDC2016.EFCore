@@ -13,7 +13,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "03-EFCore.Metadata", "EFCor
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "04-EFCore.Services", "EFCore.Services\04-EFCore.Services.csproj", "{331CA3DC-8FE4-4E3B-808E-2F30A1541198}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "06-EFCore.Platforms", "EFCore.Platforms\06-EFCore.Platforms.xproj", "{E117CCBA-C59D-4063-9B8F-C725545E8A83}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "05-EFCore.Platforms", "EFCore.Platforms\05-EFCore.Platforms.xproj", "{E117CCBA-C59D-4063-9B8F-C725545E8A83}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

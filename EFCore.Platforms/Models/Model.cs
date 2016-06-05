@@ -22,6 +22,8 @@ namespace EFCore.Platforms.Models
             // .HasForeignKey(related => related.ParentKey)
             // .HasPrincipalKey(parent => parent.AltKey);
 
+            modelBuilder.Entity<Person>()
+              .Property<DateTime>("LastUpdated");
         }
         public DbSet<Person> People { get; set; }
         public DbSet<Starship> Starships { get; set; }     
