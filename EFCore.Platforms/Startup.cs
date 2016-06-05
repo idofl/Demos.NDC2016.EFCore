@@ -29,11 +29,15 @@ namespace EFCore.Platforms
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            var dbConnectionString = Configuration["DataAccessPostgreSqlProvider:ConnectionString"];
+            //var dbConnectionString = Configuration["DataAccess:PostgreSqlProvider:ConnectionString"];
 
+            //services.AddDbContext<StarWarsContext>(options =>
+            //    options.UseNpgsql(dbConnectionString));
+
+            var dbConnectionString = Configuration["DataAccess:SqlServerProvider:ConnectionString"];
             services.AddDbContext<StarWarsContext>(options =>
-                options.UseNpgsql(dbConnectionString));
-                    
+                options.UseSqlServer(dbConnectionString));
+
             // Add framework services.
             services.AddMvc();
         }
@@ -45,6 +49,7 @@ namespace EFCore.Platforms
             loggerFactory.AddDebug();
 
             app.ApplicationServices.GetService<StarWarsContext>().Database.EnsureCreated();
+            app.ApplicationServices.GetService<StarWarsContext>().EnsureSeedData();
 
             app.UseMvc();
         }
