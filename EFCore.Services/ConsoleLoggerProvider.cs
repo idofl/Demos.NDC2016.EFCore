@@ -11,7 +11,7 @@ namespace EFCore.Services
     {
         private LogLevel _minLogLevel;
 
-        public ConsoleLoggerProvider() : this (LogLevel.Verbose)
+        public ConsoleLoggerProvider() : this (LogLevel.Trace)
         {
 
         }
@@ -37,17 +37,17 @@ namespace EFCore.Services
                 _minLogLevel = minLogLevel;
             }
 
-            public IDisposable BeginScopeImpl(object state)
+            public IDisposable BeginScope<TState>(TState state)
             {
                 return null;
-            }
+            }          
 
             public bool IsEnabled(LogLevel logLevel)
             {
                 return logLevel >= _minLogLevel;
             }
 
-            public void Log(LogLevel logLevel, int eventId, object state, Exception exception, Func<object, Exception, string> formatter)
+            public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception exception, Func<TState, Exception, string> formatter)
             {
                 ConsoleColor currentColor = Console.ForegroundColor;
                 switch (logLevel)

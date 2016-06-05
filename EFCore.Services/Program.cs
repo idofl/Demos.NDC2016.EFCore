@@ -1,6 +1,6 @@
-﻿using Microsoft.Data.Entity;
-using Microsoft.Data.Entity.Infrastructure;
-using Microsoft.Data.Entity.Update;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Update;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -18,16 +18,19 @@ namespace EFCore.Services
         {
             var serviceCollection = new ServiceCollection();
 
-            serviceCollection
-                .AddEntityFramework()
-                .AddSqlServer();
+            serviceCollection                
+                .AddEntityFrameworkSqlServer();
 
             // Replace the batch executor with a custom wrapper implementation
             serviceCollection.AddTransient<IBatchExecutor, CustomBatchExecutor>();
 
-            IServiceProvider serviceProvider = serviceCollection.BuildServiceProvider();            
-            
-            using (StarWarsContext context = new StarWarsContext(serviceProvider))
+            IServiceProvider serviceProvider = serviceCollection.BuildServiceProvider();
+
+            var optionsBuilder = new DbContextOptionsBuilder<StarWarsContext>();
+            optionsBuilder.UseSqlServer(@"Data Source=.\sqlexpress;database=EFCore.Services;Integrated Security=True;Connect Timeout=15;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+            optionsBuilder.UseInternalServiceProvider(serviceProvider);
+
+            using (StarWarsContext context = new StarWarsContext(optionsBuilder.Options))
             {
                 serviceProvider = context.GetInfrastructure<IServiceProvider>();
                 
@@ -35,7 +38,7 @@ namespace EFCore.Services
                 // (can also be added to the serviceProvider before calling ctor)
                 var loggerFactory = serviceProvider.GetService<ILoggerFactory>();
                 loggerFactory.AddProvider(new ConsoleLoggerProvider(LogLevel.Information));
-                loggerFactory.AddDebug(LogLevel.Verbose);
+                loggerFactory.AddDebug(LogLevel.Debug);
 
                 context.Database.EnsureCreated();
 
@@ -63,17 +66,13 @@ namespace EFCore.Services
 
     public class StarWarsContext : DbContext
     {
-        public StarWarsContext(IServiceProvider serviceProvider)
-            : base(serviceProvider)
+        public StarWarsContext(DbContextOptions<StarWarsContext> options)
+            : base(options)
         {
 
         }
-        public DbSet<Person> People { get; set; }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseSqlServer(@"Data Source=.\sqlexpress;database=EFCore.Services;Integrated Security=True;Connect Timeout=15;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
-        }
+      
+        public DbSet<Person> People { get; set; }    
     }
 
     public class Person

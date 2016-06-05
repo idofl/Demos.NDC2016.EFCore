@@ -1,11 +1,11 @@
-﻿using Microsoft.Data.Entity.Update;
-using Microsoft.Data.Entity.Update.Internal;
+﻿using Microsoft.EntityFrameworkCore.Update;
+using Microsoft.EntityFrameworkCore.Update.Internal;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Microsoft.Data.Entity.Storage;
+using Microsoft.EntityFrameworkCore.Storage;
 
 namespace EFCore.Services
 {
