@@ -11,7 +11,10 @@ namespace EFCore.Basics
     {
         static void Main(string[] args)
         {
-            using (StarWarsContext context = new StarWarsContext())
+            var optionsBuilder = new DbContextOptionsBuilder<StarWarsContext>();
+            optionsBuilder.UseSqlServer(@"Data Source=.\sqlexpress;database=EFCore.Basics;Integrated Security=True;Connect Timeout=15;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+
+            using (StarWarsContext context = new StarWarsContext(optionsBuilder.Options))
             {
                 context.Database.EnsureCreated();
 
@@ -36,13 +39,13 @@ namespace EFCore.Basics
     }
 
     public class StarWarsContext : DbContext
-    {        
-        public DbSet<Person> People { get; set; }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        public StarWarsContext(DbContextOptions<StarWarsContext> options )
+            : base(options)
         {
-            optionsBuilder.UseSqlServer(@"Data Source=.\sqlexpress;database=EFCore.Basics;Integrated Security=True;Connect Timeout=15;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+
         }
+        public DbSet<Person> People { get; set; }     
     }
 
     public class Person

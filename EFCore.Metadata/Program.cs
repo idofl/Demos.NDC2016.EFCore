@@ -1,4 +1,4 @@
-﻿using Microsoft.Data.Entity;
+﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Core.Mapping;
@@ -20,10 +20,12 @@ namespace EFCore.Metadata
 
         private static void PrintEFCoreMappings()
         {
+            var optionsBuilder = new DbContextOptionsBuilder<EFCore.StarWarsContext>();
+            optionsBuilder.UseSqlServer(@"Data Source=.\sqlexpress;database=EFCore.Metadata.Core;Integrated Security=True;Connect Timeout=15;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+
             Console.WriteLine("EF Core Mappings");
-            using (var context = new EFCore.StarWarsContext())
+            using (var context = new EFCore.StarWarsContext(optionsBuilder.Options))
             {
-                context.Database.EnsureDeleted();
                 context.Database.EnsureCreated();
                 foreach (var entity in context.Model.GetEntityTypes())
                 {

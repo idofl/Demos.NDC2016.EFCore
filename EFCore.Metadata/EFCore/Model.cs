@@ -1,4 +1,4 @@
-﻿using Microsoft.Data.Entity;
+﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,13 +9,14 @@ namespace EFCore.Metadata.EFCore
 {
     public class StarWarsContext : DbContext
     {
-        public DbSet<Person> People { get; set; }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        public StarWarsContext(DbContextOptions<StarWarsContext> options)
+           : base(options)
         {
-            optionsBuilder.UseSqlServer(@"Data Source=.\sqlexpress;database=EFCore.Metadata.Core;Integrated Security=True;Connect Timeout=15;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+
         }
 
+        public DbSet<Person> People { get; set; }
+      
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             //modelBuilder.Entity<Person>()
