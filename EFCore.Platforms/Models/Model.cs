@@ -13,12 +13,18 @@ namespace EFCore.Platforms.Models
         {
         }
 
-        public DbSet<Person> People { get; set; }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-          //  optionsBuilder.UseSqlServer(@"Data Source=.\sqlexpress;database=EFCore.Queries.Core;Integrated Security=True;Connect Timeout=15;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+            modelBuilder.Entity<Person>()
+                .HasAlternateKey(p => p.SwapiUrl);
+
+            // Alternate key can be used in related entities as FK
+            // .HasForeignKey(related => related.ParentKey)
+            // .HasPrincipalKey(parent => parent.AltKey);
+
         }
+        public DbSet<Person> People { get; set; }
+        public DbSet<Starship> Starships { get; set; }     
     }
 
     public class Person
@@ -27,6 +33,7 @@ namespace EFCore.Platforms.Models
         public string Name { get; set; }
         public string HairColor { get; set; }
         public double Height { get; set; }
+        public string SwapiUrl { get; set; }
         public List<Starship> Starships { get; set; }
     }
 

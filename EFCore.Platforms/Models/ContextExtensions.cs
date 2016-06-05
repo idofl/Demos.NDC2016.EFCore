@@ -17,6 +17,7 @@ namespace EFCore.Platforms.Models
                        Name = "Luke Skywalker",
                        HairColor = "Blond",
                        Height = 1.72,
+                       SwapiUrl = "http://swapi.co/api/people/1/",
                        Starships = new List<Starship>
                        {
                             new Starship
@@ -32,6 +33,7 @@ namespace EFCore.Platforms.Models
                        Name = "Han Solo",
                        HairColor = "Brown",
                        Height = 1.8,
+                       SwapiUrl = "http://swapi.co/api/people/14/",
                        Starships = new List<Starship>
                        {
                             new Starship

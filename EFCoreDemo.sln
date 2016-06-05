@@ -3,17 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EFCore.Basics", "EFCore.Basics\EFCore.Basics.csproj", "{4610762F-56EC-4E71-9D6F-F0DFC60A76CC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "01-EFCore.Basics", "EFCore.Basics\01-EFCore.Basics.csproj", "{4610762F-56EC-4E71-9D6F-F0DFC60A76CC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EFCore.Performance", "EFCore.Performance\EFCore.Performance.csproj", "{5C727416-5EA0-4316-B341-918D2571530D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EFCore.Queries", "EFCore.Queries\EFCore.Queries.csproj", "{BD31AD20-2541-4BA7-924C-38DDF48E81F9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "02-EFCore.Queries", "EFCore.Queries\02-EFCore.Queries.csproj", "{BD31AD20-2541-4BA7-924C-38DDF48E81F9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EFCore.Metadata", "EFCore.Metadata\EFCore.Metadata.csproj", "{89A8B206-C84D-4A82-8105-ABE8AC59435F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "03-EFCore.Metadata", "EFCore.Metadata\03-EFCore.Metadata.csproj", "{89A8B206-C84D-4A82-8105-ABE8AC59435F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EFCore.Services", "EFCore.Services\EFCore.Services.csproj", "{331CA3DC-8FE4-4E3B-808E-2F30A1541198}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "04-EFCore.Services", "EFCore.Services\04-EFCore.Services.csproj", "{331CA3DC-8FE4-4E3B-808E-2F30A1541198}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "EFCore.Platforms", "EFCore.Platforms\EFCore.Platforms.xproj", "{E117CCBA-C59D-4063-9B8F-C725545E8A83}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "06-EFCore.Platforms", "EFCore.Platforms\06-EFCore.Platforms.xproj", "{E117CCBA-C59D-4063-9B8F-C725545E8A83}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
