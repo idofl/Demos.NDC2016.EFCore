@@ -17,20 +17,21 @@ namespace EFCore.Platforms.Controllers
             _context = context;
         }
 
-        // GET api/values
+        // GET api/people
         [HttpGet]
         public IEnumerable<Person> Get()
         {
             return _context.People.ToList();
         }
 
-        // GET api/values/5
+        // GET api/people/5
         [HttpGet("{id}", Name ="GetPerson")]
         public Person Get(int id)
         {
             var query = from p in _context.People.Include(p => p.Starships)
                         where p.Id == id
                         select p;
+
             return query.FirstOrDefault();
         }
 
@@ -39,7 +40,7 @@ namespace EFCore.Platforms.Controllers
             "Name":"Chewbacca",
             "HairColor":"Brown",
             "Height":2.28,
-            SwapiUrl = "http://swapi.co/api/people/13/",
+            "SwapiUrl": "http://swapi.co/api/people/13/",
             "Starships":[
                 {"Id":2,"Name":"Millennium Falcon","Cost":100000,"MaxPassengers":6}
             ]
@@ -83,6 +84,7 @@ namespace EFCore.Platforms.Controllers
                 */
             try
             {
+                _context.Entry(person).Property("LastUpdated").CurrentValue = DateTime.Now;
                 _context.SaveChanges();
                 return new CreatedAtRouteResult("GetPerson", new { id = person.Id }, person);
             }
