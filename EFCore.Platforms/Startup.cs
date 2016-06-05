@@ -30,7 +30,6 @@ namespace EFCore.Platforms
         public void ConfigureServices(IServiceCollection services)
         {
             //var dbConnectionString = Configuration["DataAccess:PostgreSqlProvider:ConnectionString"];
-
             //services.AddDbContext<StarWarsContext>(options =>
             //    options.UseNpgsql(dbConnectionString));
 
