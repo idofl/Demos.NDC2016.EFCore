@@ -1,4 +1,4 @@
-﻿using Microsoft.Data.Entity;
+﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,13 +9,21 @@ namespace EFCore.Performance.EFCore
 {
     public class StarWarsContext : DbContext
     {
-        public DbSet<Person> People { get; set; }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        public StarWarsContext(DbContextOptions<StarWarsContext> options)
+            : base(options)
         {
-            //optionsBuilder.UseSqlServer(@"Server=tcp:idoftest.database.windows.net,1433;Data Source=idoftest.database.windows.net;Initial Catalog=EFCore.Performance.6;Persist Security Info=False;User ID=idof;Password=P@ssw0rd12!;Pooling=False;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
-            optionsBuilder.UseSqlServer(@"Data Source=.\sqlexpress;database=EFCore.Performance.Core;Integrated Security=True;Connect Timeout=15;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+
         }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Person>()
+                .ToTable("People");
+
+            modelBuilder.Entity<Starship>()
+                .ToTable("Starships");
+        }
+        public DbSet<Person> People { get; set; }   
     }
 
     public class Person

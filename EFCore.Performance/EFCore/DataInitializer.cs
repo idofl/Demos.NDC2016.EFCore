@@ -1,4 +1,4 @@
-﻿using Microsoft.Data.Entity;
+﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,64 +9,26 @@ namespace EFCore.Performance.EFCore
 {
     static class DataInitializer
     {
-        public static void InitDatabase()
+        public static void Warmup(bool clearData, DbContextOptions<EFCore.StarWarsContext> options)
         {
-            using (var context = new StarWarsContext())
+            using (var context = new StarWarsContext(options))
             {
                 context.Database.EnsureCreated();
+                context.People.FirstOrDefault();
 
-                if (context.People.Any())
+                if (clearData && context.People.Any())
                 {
-                    context.Database.ExecuteSqlCommand("Delete from dbo.Starship");
-                    context.Database.ExecuteSqlCommand("Delete from dbo.Person");
-                }
-
-                SeedData(context);
+                    context.Database.ExecuteSqlCommand("delete dbo.Starships");
+                    context.Database.ExecuteSqlCommand("delete dbo.People");
+                }                
             }
         }
 
-        public static void SeedData(StarWarsContext context)
+        internal static void LoadLotsOfData(DbContextOptions<EFCore.StarWarsContext> options)
         {
-            context.People.AddRange(
-                new Person
-                {
-                    Name = "Luke Skywalker",
-                    HairColor = "Blond",
-                    Height = 1.72,
-                    Starships = new List<Starship>
-                    {
-                        new Starship
-                        {
-                            Name = "X-Wing",
-                            Cost = 10000,
-                            MaxPassengers = 1,
-                        }
-                    }
-                },
-                new Person
-                {
-                    Name = "Han Solo",
-                    HairColor = "Brown",
-                    Height = 1.8,
-                    Starships = new List<Starship>
-                    {
-                        new Starship
-                        {
-                            Name = "Millennium Falcon",
-                            Cost = 100000,
-                            MaxPassengers = 6,
-                        }
-                    }
-                });
-
-            context.SaveChanges();
-        }
-
-        internal static void LoadLotsOfData()
-        {
-            using (var context = new StarWarsContext())
+            using (var context = new StarWarsContext(options))
             {
-                for (int i = 1; i < 10000; i++)
+                for (int i = 1; i < Program.TABLE_SIZE; i++)
                 {
                     context.People.Add(
                         new Person

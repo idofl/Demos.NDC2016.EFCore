@@ -8,55 +8,17 @@ namespace EFCore.Performance.EF6
 {
     static class DataInitializer
     {
-        public static void InitDatabase()
+        public static void Warmup(bool clearData)
         {
             using (var context = new StarWarsContext())
             {
-                if (context.People.Any())
+                context.People.FirstOrDefault();
+                if (clearData && context.People.Any())
                 {
-                    context.Database.ExecuteSqlCommand("Delete from dbo.Starships");
-                    context.Database.ExecuteSqlCommand("Delete from dbo.People");
-                }
-
-                SeedData(context);
+                    context.Database.ExecuteSqlCommand("delete dbo.Starships");
+                    context.Database.ExecuteSqlCommand("delete dbo.People");
+                }              
             }
-        }
-
-        public static void SeedData(StarWarsContext context)
-        {
-            context.People.AddRange( new List<Person> {
-                new Person
-                {
-                    Name = "Luke Skywalker",
-                    HairColor = "Blond",
-                    Height = 1.72,
-                    Starships = new List<Starship>
-                    {
-                        new Starship
-                        {
-                            Name = "X-Wing",
-                            Cost = 10000,
-                            MaxPassengers = 1,
-                        }
-                    }
-                },
-                new Person
-                {
-                    Name = "Han Solo",
-                    HairColor = "Brown",
-                    Height = 1.8,
-                    Starships = new List<Starship>
-                    {
-                        new Starship
-                        {
-                            Name = "Millennium Falcon",
-                            Cost = 100000,
-                            MaxPassengers = 6,
-                        }
-                    }
-                }});
-
-            context.SaveChanges();
         }
 
         internal static void LoadLotsOfData()
@@ -64,7 +26,7 @@ namespace EFCore.Performance.EF6
             using (var context = new StarWarsContext())
             {
                 context.Configuration.AutoDetectChangesEnabled = false;
-                for (int i = 1; i < 10000; i++)
+                for (int i = 1; i < Program.TABLE_SIZE; i++)
                 {
                     context.People.Add(
                         new Person
