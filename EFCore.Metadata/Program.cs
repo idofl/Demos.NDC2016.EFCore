@@ -42,7 +42,8 @@ namespace EFCore.Metadata
                 var metadata = ((IObjectContextAdapter)context).ObjectContext.MetadataWorkspace;
 
                 // Get the part of the model that contains info about the actual CLR types
-                var objectItemCollection = ((ObjectItemCollection)metadata.GetItemCollection(DataSpace.OSpace));
+                var objectItemCollection = 
+                    ((ObjectItemCollection)metadata.GetItemCollection(DataSpace.OSpace));
 
                 foreach (var entityType in metadata.GetItems<EntityType>(DataSpace.OSpace))
                 {

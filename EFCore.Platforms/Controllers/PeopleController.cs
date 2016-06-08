@@ -51,13 +51,13 @@ namespace EFCore.Platforms.Controllers
         public IActionResult Post([FromBody]Person person)
         {
             // Calling .Add will mark all entities in the graph as Added
-            //_context.People.Add(person);
+            _context.People.Add(person);
             
             // Calling .Attach will mark all entities in the graph as unmodified
             //_context.People.Attach(person);
             
             // Setting the state of a single entity will not attach related entities
-            _context.Entry(person).State = EntityState.Added;
+            //_context.Entry(person).State = EntityState.Added;
 
             // Traverse the graph and apply custom rules to decide when
             // an entity is added, and when it is modified            
