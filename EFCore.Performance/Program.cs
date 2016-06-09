@@ -18,7 +18,6 @@ namespace EFCore.Performance
             DbContextOptionsBuilder<EFCore.StarWarsContext> optionsBuilder;
             optionsBuilder = new DbContextOptionsBuilder<EFCore.StarWarsContext>();
             optionsBuilder.UseSqlServer(@"Data Source=.\sqlexpress;database=EFCore.Performance.Core;Integrated Security=True;Connect Timeout=15;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
-            //optionsBuilder.UseSqlServer(@"Server=tcp:idoftest.database.windows.net,1433;Data Source=idoftest.database.windows.net;Initial Catalog=EFCore.Performance.Core;Persist Security Info=False;User ID=idof;Password=P@ssw0rd12!;Pooling=False;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
             _options = optionsBuilder.Options;
 
             Warmup(true);
@@ -34,7 +33,7 @@ namespace EFCore.Performance
             // Warmup
             Console.WriteLine("Warming up...");
             EF6.DataInitializer.Warmup(clearData);
-            EFCore.DataInitializer.Warmup(clearData,_options);
+            EFCore.DataInitializer.Warmup(clearData, _options);
         }
 
         private static void CompareSave()
@@ -53,7 +52,7 @@ namespace EFCore.Performance
         }
 
         private static void CompareFetch()
-        {           
+        {
             Console.WriteLine($"Querying databases with {Program.TABLE_SIZE} people");
             CompareSimpleQuery();
         }

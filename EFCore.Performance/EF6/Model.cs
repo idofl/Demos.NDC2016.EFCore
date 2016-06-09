@@ -10,7 +10,6 @@ namespace EFCore.Performance.EF6
     public class StarWarsContext : DbContext
     {
         public StarWarsContext()
-            //:base(@"Server=tcp:idoftest.database.windows.net,1433;Data Source=idoftest.database.windows.net;Initial Catalog=EFCore.Performance.6;Persist Security Info=False;User ID=idof;Password=P@ssw0rd12!;Pooling=False;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;")
             : base(@"Data Source=.\sqlexpress;database=EFCore.Performance.6;Integrated Security=True;Connect Timeout=15;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False")
         {
 
