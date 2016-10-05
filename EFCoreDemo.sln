@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "01-EFCore.Basics", "EFCore.Basics\01-EFCore.Basics.csproj", "{4610762F-56EC-4E71-9D6F-F0DFC60A76CC}"
 EndProject
@@ -13,7 +13,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "03-EFCore.Metadata", "EFCor
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "04-EFCore.Services", "EFCore.Services\04-EFCore.Services.csproj", "{331CA3DC-8FE4-4E3B-808E-2F30A1541198}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "05-EFCore.Platforms", "EFCore.Platforms\05-EFCore.Platforms.xproj", "{E117CCBA-C59D-4063-9B8F-C725545E8A83}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "old05-EFCore.Platforms", "OldEFCore.Platforms\old05-EFCore.Platforms.xproj", "{E117CCBA-C59D-4063-9B8F-C725545E8A83}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "05-EFCore.Platforms", "EFCore.Platforms\05-EFCore.Platforms.xproj", "{C8D5136D-267B-41AC-B175-40D00253323A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{E117CCBA-C59D-4063-9B8F-C725545E8A83}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E117CCBA-C59D-4063-9B8F-C725545E8A83}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E117CCBA-C59D-4063-9B8F-C725545E8A83}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C8D5136D-267B-41AC-B175-40D00253323A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C8D5136D-267B-41AC-B175-40D00253323A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C8D5136D-267B-41AC-B175-40D00253323A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C8D5136D-267B-41AC-B175-40D00253323A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

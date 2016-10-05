@@ -7,8 +7,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Microsoft.EntityFrameworkCore;
 using EFCore.Platforms.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace EFCore.Platforms
 {
@@ -39,7 +39,7 @@ namespace EFCore.Platforms
 
             // Add framework services.
             services.AddMvc()
-                .AddJsonOptions(options =>
+                .AddJsonOptions(options=>
                 {
                     options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
                 });
