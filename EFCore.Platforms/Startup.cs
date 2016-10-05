@@ -48,12 +48,12 @@ namespace EFCore.Platforms
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
-            loggerFactory.AddConsole(Configuration.GetSection("Logging"));
-            loggerFactory.AddDebug();
-
             app.ApplicationServices.GetService<StarWarsContext>().Database.EnsureCreated();
             app.ApplicationServices.GetService<StarWarsContext>().EnsureSeedData();
 
+            loggerFactory.AddConsole(Configuration.GetSection("Logging"));
+            loggerFactory.AddDebug();
+           
             app.UseMvc();
         }
     }

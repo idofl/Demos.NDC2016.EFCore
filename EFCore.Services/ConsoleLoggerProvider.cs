@@ -53,11 +53,17 @@ namespace EFCore.Services
                 switch (logLevel)
                 {
                     case LogLevel.Debug:
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        break;
                     case LogLevel.Information:
                         Console.ForegroundColor = ConsoleColor.White;
                         break;
                     case LogLevel.Warning:
                         Console.ForegroundColor = ConsoleColor.Yellow;
+                        break;
+                    case LogLevel.Error:
+                    case LogLevel.Critical:
+                        Console.ForegroundColor = ConsoleColor.Red;
                         break;
                     default:
                         Console.ForegroundColor = ConsoleColor.Gray;

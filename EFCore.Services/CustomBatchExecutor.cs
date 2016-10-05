@@ -6,11 +6,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore.Storage;
+using Microsoft.Extensions.Logging;
 
 namespace EFCore.Services
 {
     public class CustomBatchExecutor : BatchExecutor
     {
+        ILogger _logger;
+
+        public CustomBatchExecutor(ILogger<CustomBatchExecutor> logger)
+        {
+            _logger = logger;
+        }
         public override int Execute(IEnumerable<ModificationCommandBatch> commandBatches, IRelationalConnection connection)
         {
             // Get list of batches and their target tables
@@ -18,7 +25,7 @@ namespace EFCore.Services
             {
                 int numOfCommands = batch.ModificationCommands.Count();
                 string table = batch.ModificationCommands.First().TableName;
-                Console.WriteLine($"batching {numOfCommands} items into table {table}");
+                _logger.LogDebug($"batching {numOfCommands} items into table {table}");
             }
             return base.Execute(commandBatches, connection);
         }
