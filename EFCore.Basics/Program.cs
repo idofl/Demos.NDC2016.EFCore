@@ -16,6 +16,7 @@ namespace EFCore.Basics
 
             using (StarWarsContext context = new StarWarsContext(optionsBuilder.Options))
             {
+                context.Database.EnsureDeleted();
                 context.Database.EnsureCreated();
 
                 Person luke = new Person

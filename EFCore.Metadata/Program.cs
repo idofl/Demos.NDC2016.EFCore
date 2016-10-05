@@ -30,6 +30,10 @@ namespace EFCore.Metadata
                 foreach (var entity in context.Model.GetEntityTypes())
                 {
                     Console.WriteLine($" {entity.ClrType.Name} => {entity.SqlServer().TableName}");
+                    foreach(var property in entity.GetProperties())
+                    {
+                        Console.WriteLine($"\t {property.Name} ({property.ClrType.Name})");
+                    }
                 }
             }
         }
@@ -68,8 +72,14 @@ namespace EFCore.Metadata
 
                     var tableName = (string)table.MetadataProperties["Table"].Value ?? table.Name;
                     var clrType = objectItemCollection.GetClrType(entityType);
-
+                    
                     Console.WriteLine($" {clrType.Name} => {tableName}");
+                    
+                    foreach (var property in entityType.DeclaredProperties)
+                    {
+                        Console.WriteLine($"\t {property.Name} ({property.TypeName})");
+                    }
+
                 }
 
                 Console.WriteLine();

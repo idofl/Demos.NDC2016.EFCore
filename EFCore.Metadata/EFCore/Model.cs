@@ -15,16 +15,8 @@ namespace EFCore.Metadata.EFCore
 
         }
 
-        public DbSet<Person> People { get; set; }
-      
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            //modelBuilder.Entity<Person>()
-            //    .ToTable("People");
-
-            //modelBuilder.Entity<Starship>()
-            //    .ToTable("Starships");
-        }
+        // Table name is according to the DbSet, not by pluralization rules
+        public DbSet<Person> People { get; set; }         
     }
 
     public class Person

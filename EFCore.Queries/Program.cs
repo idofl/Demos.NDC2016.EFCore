@@ -20,7 +20,7 @@ namespace EFCore.Queries
             EF6.DataInitializer.InitDatabase();
 
             //EagerLoad();
-            MixClientAndSql();
+            //MixClientAndSql();
         }
 
         private static void MixClientAndSql()

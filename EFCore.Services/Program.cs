@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Update;
 using Microsoft.Extensions.Caching.Memory;
@@ -22,7 +23,9 @@ namespace EFCore.Services
                 .AddEntityFrameworkSqlServer();
 
             // Replace the batch executor with a custom wrapper implementation
-            serviceCollection.AddTransient<IBatchExecutor, CustomBatchExecutor>();
+            serviceCollection
+                .AddTransient<IBatchExecutor, CustomBatchExecutor>()
+                .AddSingleton<IEntityStateListener, CustomStateListener>();
 
             IServiceProvider serviceProvider = serviceCollection.BuildServiceProvider();
 
@@ -32,6 +35,12 @@ namespace EFCore.Services
 
             using (StarWarsContext context = new StarWarsContext(optionsBuilder.Options))
             {
+                // If the next two lines would be placed after the loggerFactory
+                // providers, we will see the SQL that is used for deleting and
+                // creating the database
+                context.Database.EnsureDeleted();
+                context.Database.EnsureCreated();
+
                 serviceProvider = context.GetInfrastructure<IServiceProvider>();
                 
                 // Add a custom console logger, and a debug logger
@@ -40,7 +49,7 @@ namespace EFCore.Services
                 loggerFactory.AddProvider(new ConsoleLoggerProvider(LogLevel.Information));
                 loggerFactory.AddDebug(LogLevel.Debug);
 
-                context.Database.EnsureCreated();
+               
 
                 for (int i = 1; i < 10; i++)
                 {
