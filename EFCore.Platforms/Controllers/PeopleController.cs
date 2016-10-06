@@ -62,26 +62,29 @@ namespace EFCore.Platforms.Controllers
             // Traverse the graph and apply custom rules to decide when
             // an entity is added, and when it is modified            
             
+            /*
             _context.ChangeTracker.TrackGraph(person,
                 node =>
                 {                    
                     if (node.Entry.Entity is Starship)
                     {
+                        // Existing Starship
                         if ((node.Entry.Entity as Starship).Id > 0)
                         {
                             node.Entry.State = EntityState.Modified; 
                         }
-                        else
+                        else // New Starship
                         {
                             node.Entry.State = EntityState.Added;
                         }
                     } 
                     else
                     {
+                        // Not a Starship (Person?). Assume new
                         node.Entry.State = EntityState.Added;
                     }
                 });
-                
+               */
             try
             {
                 _context.Entry(person).Property("LastUpdated").CurrentValue = DateTime.Now;
@@ -90,7 +93,7 @@ namespace EFCore.Platforms.Controllers
             }
             catch (Exception ex)
             {
-                return new BadRequestObjectResult(ex);
+                return new BadRequestObjectResult(ex.ToString());
             }
             
         }
